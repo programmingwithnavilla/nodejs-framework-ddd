@@ -1,4 +1,4 @@
-import { BaseEntity } from "../base/BaseEntity";
+import { BaseEntity } from "../base/base-entity.base";
 
 export class User extends BaseEntity {
   private name: string;
