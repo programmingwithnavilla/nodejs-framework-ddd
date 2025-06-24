@@ -9,3 +9,5 @@ export const UserSchema = z.object({
   deletedAt: z.date().optional(),
   version: z.number(),
 });
+
+export type UserDTO = z.infer<typeof UserSchema>;
