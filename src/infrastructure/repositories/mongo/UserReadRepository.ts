@@ -15,13 +15,12 @@ export class UserReadRepository implements IRead<User> {
   }
   async findById(id: string): Promise<User | null> {
     const data = await UserMongoModel.findOne({ id }).lean();
-    if (!data) return null;
-
+    if (!data || !data.name || !data.email) return null;
     return new User(data.name, data.email);
   }
 
   async findAll(): Promise<User[]> {
     const list = await UserMongoModel.find().lean();
-    return list.map((data) => new User(data.name, data.email));
+    return list.map((data) => new User(data.name ?? "", data.email ?? ""));
   }
 }
