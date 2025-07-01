@@ -21,6 +21,6 @@ export class UserReadRepository implements IRead<User> {
 
   async findAll(): Promise<User[]> {
     const list = await UserMongoModel.find().lean();
-    return list.map((data) => new User(data.name, data.email));
+    return list.map((data) => new User(data.name ?? "", data.email ?? ""));
   }
 }
