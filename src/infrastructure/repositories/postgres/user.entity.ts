@@ -3,17 +3,17 @@ import { Entity, Column, PrimaryColumn } from "typeorm";
 @Entity("users")
 export class UserEntity {
   @PrimaryColumn()
-  id: string;
+  id!: string;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  email: string;
+  email!: string;
 
   @Column({ type: "timestamp" })
-  createdAt: Date;
+  createdAt!: Date;
 
   @Column({ type: "timestamp" })
-  updatedAt: Date;
+  updatedAt!: Date;
 }
