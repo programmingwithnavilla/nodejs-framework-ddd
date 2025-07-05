@@ -34,7 +34,7 @@ export default function (plop: NodePlopAPI) {
             {
               type: "input",
               name: "name",
-              message: `نام ${name} رو وارد کن (مثلاً user):`,
+              message: `Enter the name ${name} (e.g. user):`,
             },
           ],
       actions: [
