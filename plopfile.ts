@@ -1,55 +1,46 @@
-import { NodePlopAPI, Plop } from "plop";
+import { NodePlopAPI } from "plop";
 
 export default function (plop: NodePlopAPI) {
-  plop.setGenerator("hello", {
-    description: "Test generator",
-    prompts: [
-      {
-        type: "input",
-        name: "name",
-        message: "اسم فایل تستی چی باشه؟",
-      },
-    ],
-    actions: [
-      {
-        type: "add",
-        path: "src/__generated__/{{kebabCase name}}.ts",
-        template: "console.log('Hello {{name}}!');",
-      },
-    ],
-  });
-  plop.setGenerator("service", {
-    description: "Genearte a service in applicatio/services",
-    prompts: [
-      {
-        type: "input",
-        name: "name",
-        message: "Service name (e.g. UserService):",
-      },
-    ],
-    actions: [
-      {
-        type: "add",
-        path: "src/application/services/{{kebabCase name}}.service.ts",
-        templateFile: "plop-templates/service.hbs",
-      },
-    ],
-  });
-  plop.setGenerator("entity", {
-    description: "Generate an Entity in domain/entities",
-    prompts: [
-      {
-        type: "input",
-        name: "name",
-        message: "Entity name (e.g. User):",
-      },
-    ],
-    actions: [
-      {
-        type: "add",
-        path: "src/domain/entities/{{kebabCase name}}.entity.ts",
-        templateFile: "plop-templates/entity.hbs",
-      },
-    ],
+  const basePath = "src";
+
+  const types = [
+    { name: "entity", path: "domain/entities", suffix: "entity" },
+    {
+      name: "value-object",
+      path: "domain/value-objects",
+      suffix: "value-object",
+    },
+    { name: "repository", path: "domain/repositories", suffix: "repository" },
+    { name: "interface", path: "interfaces", suffix: "interface" },
+    { name: "service", path: "application/services", suffix: "service" },
+    { name: "command", path: "application/commands", suffix: "command" },
+    { name: "query", path: "application/queries", suffix: "query" },
+    { name: "handler", path: "application/handlers", suffix: "handler" },
+    {
+      name: "controller",
+      path: "infrastructure/controllers",
+      suffix: "controller",
+    },
+    { name: "schema", path: "interfaces/schemas", suffix: "schema" },
+  ];
+
+  types.forEach(({ name, path, suffix }) => {
+    plop.setGenerator(name, {
+      description: `Generate a ${name}`,
+      prompts: [
+        {
+          type: "input",
+          name: "name",
+          message: `نام ${name} رو وارد کن (مثلاً user):`,
+        },
+      ],
+      actions: [
+        {
+          type: "add",
+          path: `${basePath}/${path}/{{kebabCase name}}.${suffix}.ts`,
+          templateFile: `plop-templates/${name}.hbs`,
+        },
+      ],
+    });
   });
 }
