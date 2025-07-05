@@ -1,12 +1,12 @@
 import { User } from "domain/entities/user.entity";
-import { IWrite } from "domain/interfaces/iwrite.interface";
+import { IWrite } from "interfaces/iwrite.interface";
 import { injectable } from "tsyringe";
 import { UserEntity } from "./user.entity";
-import { PostgresDataSource } from "infrastructure/database/postgres-data-source";
+import { PostgresDataSource } from "infrastructure/persistence/postgres/postgres-data-source";
 
 @injectable()
 export class UserWriteRepository implements IWrite<User> {
-  private repo = PostgresDataSource.getRepository(UserEntity);
+  private repository = PostgresDataSource.getRepository(UserEntity);
   softDelete(id: string): Promise<void> {
     throw new Error("Method not implemented.");
   }
@@ -29,24 +29,24 @@ export class UserWriteRepository implements IWrite<User> {
     throw new Error("Method not implemented.");
   }
   async create(user: User): Promise<void> {
-    const entity = this.repo.create({
+    const entity = this.repository.create({
       id: user.id,
       name: user.getName(),
       email: user.getEmail(),
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     });
-    await this.repo.save(entity);
+    await this.repository.save(entity);
   }
 
   async update(user: User): Promise<void> {
-    await this.repo.update(user.id, {
+    await this.repository.update(user.id, {
       name: user.getName(),
       updatedAt: user.updatedAt,
     });
   }
 
   async delete(id: string): Promise<void> {
-    await this.repo.delete(id);
+    await this.repository.delete(id);
   }
 }

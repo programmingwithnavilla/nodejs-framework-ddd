@@ -1,4 +1,4 @@
-import { UserEntity } from "infrastructure/repositories/postgres/user.entity";
+import { UserEntity } from "infrastructure/persistence/postgres/user.entity";
 import { DataSource } from "typeorm";
 
 export const PostgresDataSource = new DataSource({
