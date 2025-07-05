@@ -5,12 +5,16 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "generate": "plop",
+    "g": "ts-node scripts/generate-alias.ts"
+    
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "plop": "^4.0.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   },
