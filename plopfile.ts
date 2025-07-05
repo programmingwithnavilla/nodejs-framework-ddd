@@ -23,24 +23,35 @@ export default function (plop: NodePlopAPI) {
     },
     { name: "schema", path: "interfaces/schemas", suffix: "schema" },
   ];
+  const cliName = getArgValue("--name");
 
   types.forEach(({ name, path, suffix }) => {
     plop.setGenerator(name, {
       description: `Generate a ${name}`,
-      prompts: [
-        {
-          type: "input",
-          name: "name",
-          message: `نام ${name} رو وارد کن (مثلاً user):`,
-        },
-      ],
+      prompts: cliName
+        ? []
+        : [
+            {
+              type: "input",
+              name: "name",
+              message: `نام ${name} رو وارد کن (مثلاً user):`,
+            },
+          ],
       actions: [
         {
           type: "add",
           path: `${basePath}/${path}/{{kebabCase name}}.${suffix}.ts`,
           templateFile: `plop-templates/${name}.hbs`,
+          data: {
+            name: cliName,
+          },
         },
       ],
     });
   });
+}
+
+function getArgValue(flag: string): string | undefined {
+  const index = process.argv.indexOf(flag);
+  return index !== -1 ? process.argv[index + 1] : undefined;
 }
