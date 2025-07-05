@@ -2,7 +2,7 @@ import { inject, injectable } from "tsyringe";
 import { QueryHandler } from "./query.handler";
 import { GetUserByIdQuery } from "application/queries/get-user-by-id.query";
 import { User } from "domain/entities/user.entity";
-import { IRead } from "domain/interfaces/iread.interface";
+import { IRead } from "interfaces/iread.interface";
 
 @injectable()
 export class GetUserByIdQueryHandler

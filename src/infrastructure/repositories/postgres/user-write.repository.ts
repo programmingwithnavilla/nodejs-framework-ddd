@@ -1,5 +1,5 @@
 import { User } from "domain/entities/user.entity";
-import { IWrite } from "domain/interfaces/iwrite.interface";
+import { IWrite } from "interfaces/iwrite.interface";
 import { injectable } from "tsyringe";
 import { UserEntity } from "./user.entity";
 import { PostgresDataSource } from "infrastructure/persistence/postgres/postgres-data-source";
