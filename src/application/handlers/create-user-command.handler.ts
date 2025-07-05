@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
 import { CommandHandler } from "./command.handler";
 import { CreateUserCommand } from "application/commands/create-user.command";
-import { IRepository } from "domain/interfaces/IRepository.interface";
 import { User } from "domain/entities/user.entity";
+import { IRepository } from "domain/interfaces/IRepository.interface";
 
 @injectable()
 export class CreateUserCommandhanlder

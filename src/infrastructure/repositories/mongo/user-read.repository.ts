@@ -1,6 +1,6 @@
 // src/infrastructure/repositories/mongo/UserReadRepository.ts
 
-import { IRead } from "domain/interfaces/IRead.interface";
+import { IRead } from "domain/interfaces/iread.interface";
 import { UserMongoModel } from "./user-mongo.repository";
 import { injectable } from "tsyringe";
 import { User } from "domain/entities/user.entity";
